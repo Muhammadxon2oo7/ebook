@@ -42,7 +42,8 @@ const DocxViewer: React.FC<DocxViewerProps> = ({ docxUrl }) => {
         tempContainer.style.visibility = 'hidden';
         document.body.appendChild(tempContainer);
 
-        await renderAsync(arrayBuffer, tempContainer, null, { experimental: true });
+        await renderAsync(arrayBuffer, tempContainer, undefined, { experimental: true });
+
 
         const paragraphs = Array.from(tempContainer.querySelectorAll('p'));
         const toc: TocItem[] = [];
@@ -205,25 +206,37 @@ const DocxViewer: React.FC<DocxViewerProps> = ({ docxUrl }) => {
         </div>
       )}
 
-      <HTMLFlipBook
-        width={400 * zoom}
-        height={600 * zoom}
-        size="stretch"
-        minWidth={300}
-        maxWidth={600}
-        minHeight={400}
-        maxHeight={800}
-        maxShadowOpacity={0.5}
-        showCover={true}
-        mobileScrollSupport={true}
-        onFlip={handlePageFlip}
-        ref={flipBookRef}
-        className="book"
-        startPage={0}
-        drawShadow={true}
-      >
-        {pages}
-      </HTMLFlipBook>
+<HTMLFlipBook
+  width={400 * zoom}
+  height={600 * zoom}
+  size="stretch"
+  minWidth={300}
+  maxWidth={600}
+  minHeight={400}
+  maxHeight={800}
+  maxShadowOpacity={0.5}
+  showCover={true}
+  mobileScrollSupport={true}
+  onFlip={handlePageFlip}
+  ref={flipBookRef}
+  className="book"
+  startPage={0}
+  drawShadow={true}
+  flippingTime={1000}
+  usePortrait={false}
+  startZIndex={0}
+  autoSize={true}
+  clickEventForward={true}
+  useMouseEvents={true}
+  swipeDistance={30}
+  showPageCorners={true}
+  style={{}} // Qo‘shildi
+  disableFlipByClick={false} // Qo‘shildi
+>
+  {pages}
+</HTMLFlipBook>
+
+
 
       <div className=" flex gap-4 mt-[90px]">
         <button
